@@ -1,0 +1,384 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+
+/* ─── Root Variables ─────────────────────────────────────────────────────── */
+:root {
+  --color-brand: #2563eb;
+  --color-brand-hover: #1d4ed8;
+  --color-surface: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  --sidebar-width: 260px;
+  --header-height: 60px;
+  --radius: 8px;
+}
+
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background-color: #ffffff;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+/* ─── Typography ──────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+code, pre, kbd {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.875em;
+}
+
+/* Inline code */
+:not(pre) > code {
+  background: #f1f5f9;
+  color: #0f172a;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  border: 1px solid #e2e8f0;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ─── Focus Ring ──────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* ─── Prose Styles for Question Content ─────────────────────────────────── */
+.prose-question {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: #334155;
+}
+
+.prose-question h1,
+.prose-question h2,
+.prose-question h3 {
+  color: #0f172a;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose-question p {
+  margin-bottom: 1em;
+}
+
+.prose-question strong {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.prose-question ul,
+.prose-question ol {
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.prose-question li {
+  margin-bottom: 0.25em;
+}
+
+.prose-question pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1.25rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.25em 0;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  border: 1px solid #1e293b;
+}
+
+.prose-question blockquote {
+  border-left: 3px solid #2563eb;
+  padding-left: 1rem;
+  color: #475569;
+  margin: 1em 0;
+  font-style: italic;
+}
+
+/* ─── Utility Classes ─────────────────────────────────────────────────────── */
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-interactive {
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  border-color: #bfdbfe;
+}
+
+/* ─── Difficulty Badges ──────────────────────────────────────────────────── */
+.badge-easy {
+  color: #16a34a;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.badge-medium {
+  color: #d97706;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.badge-hard {
+  color: #dc2626;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* ─── Sidebar ─────────────────────────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+  overflow-y: auto;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+  transition: background 0.1s, color 0.1s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sidebar-link:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.sidebar-link.active {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.sidebar-link.active svg {
+  color: #2563eb;
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────────── */
+.platform-header {
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  z-index: 30;
+}
+
+/* ─── Main Content Area ───────────────────────────────────────────────────── */
+.platform-main {
+  margin-left: var(--sidebar-width);
+  padding-top: var(--header-height);
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* ─── Progress Bar ────────────────────────────────────────────────────────── */
+.progress-bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: #2563eb;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* ─── Accordion ──────────────────────────────────────────────────────────── */
+.accordion-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #0f172a;
+  background: #ffffff;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.accordion-trigger:hover {
+  background: #f8fafc;
+}
+
+.accordion-content {
+  padding: 0 16px 16px;
+  background: #ffffff;
+  font-size: 0.9rem;
+  color: #334155;
+  line-height: 1.7;
+}
+
+/* ─── Tab styles ──────────────────────────────────────────────────────────── */
+.tab-list {
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.tab-trigger {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.1s;
+  border: none;
+  background: transparent;
+}
+
+.tab-trigger[data-state="active"] {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Chat Bubbles (Interview) ───────────────────────────────────────────── */
+.chat-bubble-ai {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px 12px 12px 4px;
+  padding: 12px 16px;
+  max-width: 80%;
+  align-self: flex-start;
+}
+
+.chat-bubble-user {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px 12px 4px 12px;
+  padding: 12px 16px;
+  max-width: 80%;
+  align-self: flex-end;
+}
+
+/* ─── Landing page hero ──────────────────────────────────────────────────── */
+.hero-section {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* ─── Code syntax highlight tokens ──────────────────────────────────────── */
+.token-keyword { color: #7c3aed; }
+.token-string  { color: #059669; }
+.token-comment { color: #94a3b8; font-style: italic; }
+.token-number  { color: #d97706; }
+.token-function { color: #2563eb; }
+
+/* ─── Skeleton loading ───────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 4px;
+}
+
+/* ─── Animations ──────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease forwards;
+}
